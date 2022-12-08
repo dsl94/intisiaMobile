@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Log In</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <ion-item lines="full">
+      <ion-label position="floating">Username</ion-label>
+      <ion-input name="username" type="text" [(ngModel)]="form.username" required #username="ngModel"></ion-input>
+      <span *ngIf="username.errors && f.submitted" slot="error">Username is required</span>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input name="password" type="password" [(ngModel)]="form.password" required #password="ngModel"></ion-input>
+      <span *ngIf="password.errors && f.submitted" slot="error">Password is required</span>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
