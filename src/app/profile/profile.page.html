@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="loaded">
+    <ion-item>
+      <ion-label position="stacked" color="primary">Name:</ion-label>
+      <ion-input value="{{pilot.fullName}}" readonly="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Username:</ion-label>
+      <ion-input value="{{pilot.userName}}" readonly="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Email:</ion-label>
+      <ion-input value="{{pilot.email}}" readonly="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Location:</ion-label>
+      <ion-input value="{{pilot.location}}" readonly="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Number of hours:</ion-label>
+      <ion-input value="{{pilot.minutes | m2h}}" readonly="true"></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-list-header>
+        <ion-label color="primary">Last 5 flights</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let flight of pilot.flights">
+        <ion-label>{{flight.departure}}-{{flight.arrival}} <span class="ion-float-right">{{flight.aircraft}}</span></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <br>
+</ion-content>

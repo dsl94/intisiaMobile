@@ -2,10 +2,11 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import {ProfilePage} from "./profile.page";
+import {ProfilePageRoutingModule} from "./profile-routing.module";
+import {MinutesToHours} from "../minutes-hours.pipe";
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 @NgModule({
   imports: [
@@ -13,8 +14,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    ProfilePageRoutingModule
   ],
-  declarations: [Tab1Page]
+  declarations: [MinutesToHours, ProfilePage]
 })
-export class Tab1PageModule {}
+export class ProfilePageModule {}

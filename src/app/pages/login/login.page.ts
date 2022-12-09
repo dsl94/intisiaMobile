@@ -41,16 +41,9 @@ export class LoginPage implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenService.getUser().roles;
-        if(this.roles.includes('ROLE_SYSTEM_ADMIN')) {
-          this.router.navigate(['/admin/users']);
-        } else if (this.roles.includes('ROLE_ADMIN')) {
-          this.router.navigate(['/app/tabs/tab1']);
-        } else {
-          this.router.navigate(['/user/profile']);
-        }
+        this.router.navigate(['/app/tabs/profile']);
       },
         (err: any) => {
-          console.log(err);
         this.isLoginFailed = true;
         this.presentAlert().then();
       }
