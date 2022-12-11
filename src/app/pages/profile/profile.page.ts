@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {UserService} from "../services/user.service";
-import {User} from "../models/user.model";
+import {UserService} from "../../services/user.service";
+import {User} from "../../models/user.model";
 import {LoadingController} from "@ionic/angular";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +15,12 @@ export class ProfilePage {
 
   constructor(
     private userService: UserService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+      console.log("Usao")
       this.loadData();
   }
 
@@ -32,5 +35,10 @@ export class ProfilePage {
       loading.dismiss();
       this.loaded = true;
     });
+  }
+
+  goToFlightDetail(id: any) {
+    console.log("Kliknuo da item: ", id);
+    this.router.navigate(['/app/tabs/profile/flight/', id]);
   }
 }

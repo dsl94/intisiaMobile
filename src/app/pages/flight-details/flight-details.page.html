@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#" [routerLink]="['/app/tabs/profile']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Flight details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="loaded">
+    <ion-card color="secondary">
+      <ion-card-header>
+        <ion-card-title>Basic info</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <p><b>Departure:</b> <br>{{flight.departure}}</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>Arrival:</b></p><br>
+            <p class="ion-float-right">{{flight.arrival}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p><b>Start time:</b><br> {{flight.startTime}}</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>End time:</b></p><br>
+            <p class="ion-float-right">{{flight.endTime}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p><b>Flight time:</b><br> {{flight.length}}</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>Aircraft:</b></p><br>
+            <p class="ion-float-right">{{flight.aircraft}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
