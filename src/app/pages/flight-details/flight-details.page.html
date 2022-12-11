@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <div *ngIf="loaded">
-    <ion-card color="secondary">
+    <ion-card color="tertiary">
       <ion-card-header>
         <ion-card-title>Basic info</ion-card-title>
       </ion-card-header>
@@ -39,6 +39,61 @@
           <ion-col>
             <p class="ion-float-right"><b>Aircraft:</b></p><br>
             <p class="ion-float-right">{{flight.aircraft}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <p><b>Passengers and cargo:</b><br>
+          {{flight.info}}</p>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <ion-card color="secondary">
+      <ion-card-header>
+        <ion-card-title>Fuel info</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <p><b>Fuel start:</b> <br>{{flight.fuelStart}} kg</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>Fuel end:</b></p><br>
+            <p class="ion-float-right">{{flight.fuelEnd}} kg</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p *ngIf="flight.fuelBought > 0"><b>Initial fuel:</b><br>{{flight.fuelStart - flight.fuelBought}} kg</p>
+            <p *ngIf="flight.fuelBought ===  0"><b>Initial fuel:</b><br>0 kg</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>Fuel bought:</b></p><br>
+            <p class="ion-float-right">{{flight.fuelBought}} kg</p>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <ion-card color="success">
+      <ion-card-header>
+        <ion-card-title>Finance info</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <p><b>Fuel spent:</b> <br>{{flight.fuelSpent}} kg</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>Fuel cost:</b></p><br>
+            <p class="ion-float-right">${{flight.fuelCost}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p><b>Earning:</b><br>${{flight.earning}}</p>
+          </ion-col>
+          <ion-col>
+            <p class="ion-float-right"><b>Profit:</b></p><br>
+            <p class="ion-float-right">${{flight.profit}}</p>
           </ion-col>
         </ion-row>
       </ion-card-content>

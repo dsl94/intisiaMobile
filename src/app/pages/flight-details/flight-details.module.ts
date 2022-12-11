@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FlightDetailsPageRoutingModule } from './flight-details-routing.module';
 
 import { FlightDetailsPage } from './flight-details.page';
+import {RemoveCommaPipe} from "../../remove-comma.pipe";
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { FlightDetailsPage } from './flight-details.page';
     IonicModule,
     FlightDetailsPageRoutingModule
   ],
-  declarations: [FlightDetailsPage]
+  declarations: [RemoveCommaPipe, FlightDetailsPage]
 })
 export class FlightDetailsPageModule {}
