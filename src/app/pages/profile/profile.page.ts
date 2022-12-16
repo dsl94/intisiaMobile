@@ -20,7 +20,6 @@ export class ProfilePage {
   ) {}
 
   ngOnInit(): void {
-      console.log("Usao")
       this.loadData();
   }
 

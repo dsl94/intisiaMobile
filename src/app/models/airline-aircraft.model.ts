@@ -9,7 +9,6 @@ export class AirlineAircraft {
     registration: string;
     cargo: boolean;
     fuelOnBoard: number;
-    flights: Flight[]
 
     constructor(id: number, name: string, location: string, type: string, capacity: number, registration: string, cargo: boolean, fuelOnBoard: number) {
         this.id = id;
