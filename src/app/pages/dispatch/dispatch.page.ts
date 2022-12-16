@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RouteService} from "../../services/route.service";
 import {TokenService} from "../../services/token.service";
-import {Router} from "@angular/router";
+import { Router} from "@angular/router";
 import {Booking} from "../../models/booking.model";
 import {LoadingController} from "@ionic/angular";
 
@@ -17,10 +17,17 @@ export class DispatchPage implements OnInit {
 
   constructor(
     private routeService: RouteService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.tokenService.signOut();
+    this.router.navigate(['/']);
   }
 
   ionViewDidEnter() {

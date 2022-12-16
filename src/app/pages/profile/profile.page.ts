@@ -3,6 +3,7 @@ import {UserService} from "../../services/user.service";
 import {User} from "../../models/user.model";
 import {LoadingController} from "@ionic/angular";
 import {Route, Router} from "@angular/router";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-profile',
@@ -16,11 +17,17 @@ export class ProfilePage {
   constructor(
     private userService: UserService,
     private loadingCtrl: LoadingController,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
 
+  }
+
+  logout() {
+    this.tokenService.signOut();
+    this.router.navigate(['/']);
   }
 
   ionViewDidEnter() {

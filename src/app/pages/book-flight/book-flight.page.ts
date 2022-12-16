@@ -45,6 +45,11 @@ export class BookFlightPage implements OnInit {
     this.loadData();
   }
 
+  logout() {
+    this.tokenService.signOut();
+    this.router.navigate(['/']);
+  }
+
   async loadData() {
     const loading = await this.loadingCtrl.create({
       message: 'Loading..',
