@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../book-flight/book-flight.module').then(m => m.BookFlightPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'dispatch',
+        loadChildren: () => import('../dispatch/dispatch.module').then(m => m.DispatchPageModule)
       },
       {
         path: 'flight',

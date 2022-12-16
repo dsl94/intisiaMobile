@@ -20,7 +20,11 @@ export class ProfilePage {
   ) {}
 
   ngOnInit(): void {
-      this.loadData();
+
+  }
+
+  ionViewDidEnter() {
+    this.loadData();
   }
 
   async loadData() {

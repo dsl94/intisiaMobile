@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'book-flight',
     loadChildren: () => import('./pages/book-flight/book-flight.module').then( m => m.BookFlightPageModule)
+  },
+  {
+    path: 'dispatch',
+    loadChildren: () => import('./pages/dispatch/dispatch.module').then( m => m.DispatchPageModule)
   }
 ];
 @NgModule({

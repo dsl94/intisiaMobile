@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Dispatch center
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="loaded && !booking.departure">
+    <ion-card color="medium">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">No booked flight</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+  </div>
+    <div *ngIf="loaded && booking.departure">
+      <ion-card color="tertiary">
+        <ion-card-header>
+          <ion-card-title>Basic info</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <p><b>Departure:</b> <br>{{booking.departure}}</p>
+            </ion-col>
+            <ion-col>
+              <p class="ion-float-right"><b>Arrival:</b></p><br>
+              <p class="ion-float-right">{{booking.arrival}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p><b>Flight number:</b><br> {{booking.flightNumber}}</p>
+            </ion-col>
+            <ion-col>
+              <p class="ion-float-right"><b>Aircraft:</b></p><br>
+              <p class="ion-float-right">{{booking.aircraft}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-card color="secondary">
+        <ion-card-header>
+          <ion-card-title>Load info</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <p><b>Passengers:</b> <br>{{booking.passengers}}</p>
+            </ion-col>
+            <ion-col>
+              <p class="ion-float-right"><b>Cargo:</b></p><br>
+              <p class="ion-float-right">{{booking.cargo}} kg</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p><b>Special cargo:</b> <br>{{booking.specialCargo}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="cancelBooking()" type="button" color="warning" expand="block">Cancel booking</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+</ion-content>

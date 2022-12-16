@@ -7,6 +7,7 @@ import {AircraftService} from "../../services/aircraft.service";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {LoadingController} from "@ionic/angular";
+import {refresh} from "ionicons/icons";
 
 @Component({
   selector: 'app-book-flight',
@@ -37,6 +38,10 @@ export class BookFlightPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+  }
+
+  ionViewDidEnter() {
     this.loadData();
   }
 
