@@ -40,7 +40,7 @@
             <ion-list-header>
               <ion-label color="primary">Last 5 flights</ion-label>
             </ion-list-header>
-            <ion-item *ngFor="let flight of pilot.flights" [routerLink]="['/app/tabs/flight/', flight.id]">
+            <ion-item *ngFor="let flight of pilot.lastFiveFlights" [routerLink]="['/app/tabs/flight/', flight.id]">
               <ion-label>{{flight.departure}}-{{flight.arrival}} <span class="ion-float-right">{{flight.aircraft}}</span></ion-label>
             </ion-item>
           </ion-list>

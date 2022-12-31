@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
 import { Flight } from '../models/flight.model';
 import * as url from "url";
+import {Location} from "../models/location.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,7 @@ export class UserService {
 
   readProfile() {
     var url = this.baseUrl + '/user/profile';
-    return this.http.get(url).pipe(
-      map((data: any) => this.createUserFromObject(data))
-    );
+    return this.http.get<User>(url);
   }
 
   changeLocation(location: string) {
@@ -24,47 +23,6 @@ export class UserService {
   }
 
   readLocation() {
-    return this.http.get(this.baseUrl + '/user/profile/location').pipe(
-      map((data: any) => data.icao)
-    );
-  }
-
-  private createUserFromObject(item: any) {
-     return new User(
-        item.userName,
-        item.fullName,
-        item.email,
-        item.secretCode,
-        item.airline,
-        item.location,
-        item.minutes,
-        item.lastFiveFlights.map((data: any) => this.convertObjectToFlight(data))
-      );
-  }
-
-  private convertObjectToFlight(item: any) {
-    return new Flight(
-      item.id,
-      item.departure,
-      item.arrival,
-      item.startTime,
-      item.endTime,
-      item.length,
-      item.aircraft,
-      item.user,
-      item.fuelSpent,
-      item.earning,
-      item.fuelCost,
-      item.profit,
-      item.info,
-      item.landingRate,
-      item.fuelStart,
-      item.fuelEnd,
-      item.fuelBought,
-      item.deplat,
-      item.deplon,
-      item.arlat,
-      item.arlon
-    );
+    return this.http.get<Location>(this.baseUrl + '/user/profile/location');
   }
 }

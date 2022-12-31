@@ -13,32 +13,6 @@ export class FlightService {
   ) {}
 
   readFlight(id: number) {
-    return this.http.get(this.baseUrl + '/flight/info/' + id).pipe(map((data: any) => this.convertObjectToFlight(data)));
-  }
-
-  private convertObjectToFlight(item: any) {
-    return new Flight(
-      item.id,
-      item.departure,
-      item.arrival,
-      item.startTime,
-      item.endTime,
-      item.length,
-      item.aircraft,
-      item.user,
-      item.fuelSpent,
-      item.earning,
-      item.fuelCost,
-      item.profit,
-      item.info,
-      item.landingRate,
-      item.fuelStart,
-      item.fuelEnd,
-      item.fuelBought,
-      item.deplat,
-      item.deplon,
-      item.arlat,
-      item.arlon
-    );
+    return this.http.get<Flight>(this.baseUrl + '/flight/info/' + id);
   }
 }

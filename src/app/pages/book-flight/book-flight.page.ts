@@ -57,7 +57,7 @@ export class BookFlightPage implements OnInit {
     });
     await loading.present();
     this.userService.readLocation().subscribe((data) => {
-      this.location = data;
+      this.location = data.icao;
       this.routeService.readRoutesForLocation().subscribe((data) => {
         this.routes = data;
         loading.dismiss();

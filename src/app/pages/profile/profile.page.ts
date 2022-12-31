@@ -48,7 +48,6 @@ export class ProfilePage {
   }
 
   goToFlightDetail(id: any) {
-    console.log("Kliknuo da item: ", id);
     this.router.navigate(['/app/tabs/profile/flight/', id]);
   }
 }
