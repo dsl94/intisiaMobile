@@ -119,7 +119,9 @@ export class DispatchPage implements OnInit {
     this.routeService.getUserBooking().subscribe((data: any) => {
       this.booking = data;
       this.loaded = true;
-      this.initMap();
+      if (this.booking.departure != undefined) {
+        this.initMap();
+      }
       loading.dismiss();
     });
   }
