@@ -14,6 +14,6 @@ export class AircraftService {
 
   readAirlineAircraftForLocation() {
     return this.http
-      .get<AirlineAircraft>(this.baseUrl + '/booking/user/booking/aircrafts');
+      .get<AirlineAircraft[]>(this.baseUrl + '/booking/user/booking/aircrafts');
   }
 }
