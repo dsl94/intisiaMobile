@@ -8,6 +8,8 @@ import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {LoadingController} from "@ionic/angular";
 import {refresh} from "ionicons/icons";
+import {Store} from "@ngrx/store";
+import {resetBasicUserInfo} from "../../state/user/user.actions";
 
 @Component({
   selector: 'app-book-flight',
@@ -18,7 +20,6 @@ export class BookFlightPage implements OnInit {
 
   routes: Route[] = [];
   aircrafts: AirlineAircraft[] = [];
-  searchText = '';
   location: string = '';
   canBook: boolean = false;
   form: any = {
@@ -34,7 +35,8 @@ export class BookFlightPage implements OnInit {
     private aircraftService: AircraftService,
     private userService: UserService,
     private router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class BookFlightPage implements OnInit {
 
   logout() {
     this.tokenService.signOut();
+    this.store.dispatch(resetBasicUserInfo());
     this.router.navigate(['/']);
   }
 

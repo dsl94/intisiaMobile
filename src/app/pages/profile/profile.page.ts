@@ -4,6 +4,8 @@ import {User} from "../../models/user.model";
 import {LoadingController} from "@ionic/angular";
 import {Route, Router} from "@angular/router";
 import {TokenService} from "../../services/token.service";
+import {resetBasicUserInfo} from "../../state/user/user.actions";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +20,8 @@ export class ProfilePage {
     private userService: UserService,
     private loadingCtrl: LoadingController,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +30,7 @@ export class ProfilePage {
 
   logout() {
     this.tokenService.signOut();
+    this.store.dispatch(resetBasicUserInfo());
     this.router.navigate(['/']);
   }
 

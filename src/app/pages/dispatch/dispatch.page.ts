@@ -5,6 +5,8 @@ import { Router} from "@angular/router";
 import {Booking} from "../../models/booking.model";
 import {LoadingController} from "@ionic/angular";
 import * as L from "leaflet";
+import {resetBasicUserInfo} from "../../state/user/user.actions";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-dispatch',
@@ -95,7 +97,8 @@ export class DispatchPage implements OnInit {
     private routeService: RouteService,
     private loadingCtrl: LoadingController,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -103,6 +106,7 @@ export class DispatchPage implements OnInit {
 
   logout() {
     this.tokenService.signOut();
+    this.store.dispatch(resetBasicUserInfo());
     this.router.navigate(['/']);
   }
 

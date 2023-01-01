@@ -3,6 +3,9 @@ import {AuthService} from "../../services/auth.service";
 import {TokenService} from "../../services/token.service";
 import {Router} from "@angular/router";
 import {AlertController} from "@ionic/angular";
+import { Store } from '@ngrx/store';
+import {initBasicUserInfo} from "../../state/user/user.actions";
+import {LoginModel} from "../../models/login.model";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +24,8 @@ export class LoginPage implements OnInit {
   roles: string[] = [];
 
   constructor(private authService: AuthService, private tokenService: TokenService, private router: Router,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private store: Store) { }
 
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
@@ -34,9 +38,11 @@ export class LoginPage implements OnInit {
     const { username, password } = this.form;
 
     this.authService.login(username, password).subscribe(
-        (data: { token: any; }) => {
+        (data: LoginModel) => {
         this.tokenService.saveToken(data.token);
         this.tokenService.saveUser(data);
+        let basicUser = {location: data.location, hasBookedFlight: data.numberOfBookings > 0}
+        this.store.dispatch(initBasicUserInfo({user: basicUser}))
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
