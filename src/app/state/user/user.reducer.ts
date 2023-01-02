@@ -14,7 +14,7 @@ export const initialState: UserState = {
 };
 
 export const userReducer = createRehydrateReducer(
-  "INTISIA_STATE",
+  "USER_STATE",
   // Supply the initial state
   initialState,
   on(initBasicUserInfo, (state, { user }) => ({

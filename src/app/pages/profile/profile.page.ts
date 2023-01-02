@@ -7,6 +7,7 @@ import {TokenService} from "../../services/token.service";
 import {changeLocation, resetBasicUserInfo} from "../../state/user/user.actions";
 import {Store} from "@ngrx/store";
 import {selectLocation} from "../../state/user/user.selectors";
+import {loadRoutes} from "../../state/route/route.actions";
 
 @Component({
   selector: 'app-profile',

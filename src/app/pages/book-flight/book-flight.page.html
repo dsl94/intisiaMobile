@@ -20,7 +20,7 @@
       <ion-row  *ngIf="!canBook">
         <ion-text class="ion-text-center" color="medium">You cant book flight since you already have one booked</ion-text>
       </ion-row>
-      <ion-item [disabled]="!canBook" *ngFor="let flight of routes" (click)="setOpen(true, flight.id)">
+      <ion-item [disabled]="!canBook" *ngFor="let flight of routes$ | async" (click)="setOpen(true, flight.id)">
         <ion-label>{{flight.departure}}-{{flight.arrival}} <span class="ion-float-right">${{flight.ticketPrice}}</span></ion-label>
       </ion-item>
     </ion-list>

@@ -6,6 +6,7 @@ import {AlertController} from "@ionic/angular";
 import { Store } from '@ngrx/store';
 import {initBasicUserInfo} from "../../state/user/user.actions";
 import {LoginModel} from "../../models/login.model";
+import {loadRoutes} from "../../state/route/route.actions";
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,7 @@ export class LoginPage implements OnInit {
         this.tokenService.saveUser(data);
         let basicUser = {location: data.location, hasBookedFlight: data.numberOfBookings > 0}
         this.store.dispatch(initBasicUserInfo({user: basicUser}))
-
+        this.store.dispatch(loadRoutes());
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenService.getUser().roles;

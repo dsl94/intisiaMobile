@@ -15,16 +15,18 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {EffectsModule} from "@ngrx/effects";
 import { userReducer } from './state/user/user.reducer';
 import {UserEffects} from "./state/user/user.effects";
+import {routesReducer} from "./state/route/route.reducer";
+import {RouteEffects} from "./state/route/route.effects";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule,
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot({ user: userReducer, routes: routesReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([UserEffects]),],
+    EffectsModule.forRoot([UserEffects, RouteEffects]),],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: 'BASE_API_URL', useValue: environment.apiUrl},

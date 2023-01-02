@@ -4,7 +4,9 @@ import {AppState} from "../app.state";
 import {UserService} from "../../services/user.service";
 import {Store} from "@ngrx/store";
 import {changeLocation} from "./user.actions";
-import {from, switchMap} from "rxjs";
+import { of, from } from 'rxjs';
+import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
+import {loadRoutes} from "../route/route.actions";
 
 @Injectable()
 export class UserEffects {
@@ -20,9 +22,10 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(changeLocation),
-        switchMap(( location) => from(this.userService.changeLocation(location.location)))
+        switchMap(( location) => from(this.userService.changeLocation(location.location)).pipe(
+          map(() => loadRoutes())
+          )
+        )
       ),
-    // Most effects dispatch another action, but this one is just a "fire and forget" effect
-    { dispatch: false }
   );
 }

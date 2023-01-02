@@ -10,8 +10,9 @@ import {LoadingController} from "@ionic/angular";
 import {refresh} from "ionicons/icons";
 import {Store} from "@ngrx/store";
 import {resetBasicUserInfo} from "../../state/user/user.actions";
-import {selectLocation, selectUser} from "../../state/user/user.selectors";
+import {selectHasBookedFlight, selectLocation, selectUser} from "../../state/user/user.selectors";
 import {AppState} from "../../state/app.state";
+import {selectAllRoutes} from "../../state/route/routes.selectors";
 
 @Component({
   selector: 'app-book-flight',
@@ -20,10 +21,10 @@ import {AppState} from "../../state/app.state";
 })
 export class BookFlightPage implements OnInit {
 
-  routes: Route[] = [];
+  routes$ = this.store.select(selectAllRoutes);
   aircrafts: AirlineAircraft[] = [];
   location: string | undefined = "";
-  canBook: boolean = false;
+  canBook: boolean | undefined = false;
   form: any = {
     aircraft: null,
   };
@@ -58,20 +59,11 @@ export class BookFlightPage implements OnInit {
   }
 
   async loadData() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Loading..',
-      spinner: 'bubbles',
-    });
-    await loading.present();
-      this.routeService.readRoutesForLocation().subscribe((data) => {
-        this.routes = data;
-        loading.dismiss();
-        this.loaded = true;
-      });
       this.aircraftService.readAirlineAircraftForLocation().subscribe((data) => {
         this.aircrafts = data;
+        this.loaded = true;
       });
-      this.routeService.canBook().subscribe((data) => {
+      this.store.select(selectHasBookedFlight).subscribe((data) => {
         this.canBook = data;
       });
   }
