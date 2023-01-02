@@ -10,6 +10,8 @@ import {LoadingController} from "@ionic/angular";
 import {refresh} from "ionicons/icons";
 import {Store} from "@ngrx/store";
 import {resetBasicUserInfo} from "../../state/user/user.actions";
+import {selectLocation, selectUser} from "../../state/user/user.selectors";
+import {AppState} from "../../state/app.state";
 
 @Component({
   selector: 'app-book-flight',
@@ -20,7 +22,8 @@ export class BookFlightPage implements OnInit {
 
   routes: Route[] = [];
   aircrafts: AirlineAircraft[] = [];
-  location: string = '';
+  // @ts-ignore
+  location: string | undefined = "";
   canBook: boolean = false;
   form: any = {
     aircraft: null,
@@ -36,15 +39,17 @@ export class BookFlightPage implements OnInit {
     private userService: UserService,
     private router: Router,
     private loadingCtrl: LoadingController,
-    private store: Store
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-
   }
 
   ionViewDidEnter() {
     this.loadData();
+    this.store.select(selectLocation).subscribe(location => {
+      this.location = location;
+    });
   }
 
   logout() {
@@ -59,8 +64,6 @@ export class BookFlightPage implements OnInit {
       spinner: 'bubbles',
     });
     await loading.present();
-    this.userService.readLocation().subscribe((data) => {
-      this.location = data.icao;
       this.routeService.readRoutesForLocation().subscribe((data) => {
         this.routes = data;
         loading.dismiss();
@@ -72,7 +75,6 @@ export class BookFlightPage implements OnInit {
       this.routeService.canBook().subscribe((data) => {
         this.canBook = data;
       });
-    });
   }
 
   setOpen(open: boolean, id: number) {
