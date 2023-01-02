@@ -6,6 +6,12 @@ export const initBasicUserInfo = createAction(
   props<{ user: BasicUser }>()
 );
 
+export const changeLocation = createAction(
+  '[Profile Page] Change Location',
+  props<{ location: string }>()
+);
+
+
 export const resetBasicUserInfo = createAction(
   '[Logout Action] Reset Basic User'
 );

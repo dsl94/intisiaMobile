@@ -4,8 +4,9 @@ import {User} from "../../models/user.model";
 import {LoadingController} from "@ionic/angular";
 import {Route, Router} from "@angular/router";
 import {TokenService} from "../../services/token.service";
-import {resetBasicUserInfo} from "../../state/user/user.actions";
+import {changeLocation, resetBasicUserInfo} from "../../state/user/user.actions";
 import {Store} from "@ngrx/store";
+import {selectLocation} from "../../state/user/user.selectors";
 
 @Component({
   selector: 'app-profile',
@@ -13,9 +14,13 @@ import {Store} from "@ngrx/store";
   styleUrls: ['profile.page.scss']
 })
 export class ProfilePage {
+  form: any = {
+    location: null,
+  };
+  location: string | undefined = '';
   pilot!: User;
   loaded = false;
-
+  isModalOpen = false;
   constructor(
     private userService: UserService,
     private loadingCtrl: LoadingController,
@@ -28,6 +33,10 @@ export class ProfilePage {
 
   }
 
+  onSubmit() {
+    this.changeLocation();
+  }
+
   logout() {
     this.tokenService.signOut();
     this.store.dispatch(resetBasicUserInfo());
@@ -36,6 +45,19 @@ export class ProfilePage {
 
   ionViewDidEnter() {
     this.loadData();
+    // @ts-ignore
+    this.store.select(selectLocation).subscribe(location => {
+      this.location = location;
+    });
+  }
+
+  changeLocation() {
+    this.store.dispatch(changeLocation(this.form));
+    this.isModalOpen  = false;
+    this.location = this.form.location;
+    this.form = {
+      location: null
+    }
   }
 
   async loadData() {

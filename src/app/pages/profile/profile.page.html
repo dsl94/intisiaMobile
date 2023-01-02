@@ -30,12 +30,17 @@
           </ion-item>
           <ion-item lines="full">
             <ion-label position="stacked" color="primary">Location:</ion-label>
-            <ion-input value="{{pilot.location}}" readonly="true"></ion-input>
+            <ion-input value="{{location}}" readonly="true"></ion-input>
           </ion-item>
           <ion-item lines="full">
             <ion-label position="stacked" color="primary">Number of hours:</ion-label>
             <ion-input value="{{pilot.minutes | m2h}}" readonly="true"></ion-input>
           </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="isModalOpen = true" type="butyon" color="primary" expand="block">Change location</ion-button>
+            </ion-col>
+          </ion-row>
           <ion-list lines="full">
             <ion-list-header>
               <ion-label color="primary">Last 5 flights</ion-label>
@@ -48,4 +53,30 @@
       </ion-row>
     </ion-grid>
   </div>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="tertiary">
+          <ion-title>Aircraft select</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalOpen = false">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <ion-item lines="full">
+            <ion-label position="floating">New Location ICAO code</ion-label>
+            <ion-input name="location" type="text" [(ngModel)]="form.location" required #location="ngModel"></ion-input>
+            <span *ngIf="location.errors && f.submitted" slot="error">Location is required</span>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="tertiary" expand="block">Change location</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

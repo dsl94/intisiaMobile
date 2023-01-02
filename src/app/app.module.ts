@@ -14,6 +14,7 @@ import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {EffectsModule} from "@ngrx/effects";
 import { userReducer } from './state/user/user.reducer';
+import {UserEffects} from "./state/user/user.effects";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,7 @@ import { userReducer } from './state/user/user.reducer';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),],
+    EffectsModule.forRoot([UserEffects]),],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: 'BASE_API_URL', useValue: environment.apiUrl},

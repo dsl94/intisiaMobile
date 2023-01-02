@@ -22,7 +22,6 @@ export class BookFlightPage implements OnInit {
 
   routes: Route[] = [];
   aircrafts: AirlineAircraft[] = [];
-  // @ts-ignore
   location: string | undefined = "";
   canBook: boolean = false;
   form: any = {
