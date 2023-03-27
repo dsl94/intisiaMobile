@@ -11,6 +11,11 @@ export const changeLocation = createAction(
   props<{ location: string }>()
 );
 
+export const bookFlight = createAction(
+  '[Book Page] Change location',
+  props<{ booked: boolean }>()
+);
+
 
 export const resetBasicUserInfo = createAction(
   '[Logout Action] Reset Basic User'

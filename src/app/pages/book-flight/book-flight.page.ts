@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 import {LoadingController} from "@ionic/angular";
 import {refresh} from "ionicons/icons";
 import {Store} from "@ngrx/store";
-import {resetBasicUserInfo} from "../../state/user/user.actions";
+import {bookFlight, resetBasicUserInfo} from "../../state/user/user.actions";
 import {selectHasBookedFlight, selectLocation, selectUser} from "../../state/user/user.selectors";
 import {AppState} from "../../state/app.state";
 import {selectAllRoutes} from "../../state/route/routes.selectors";
@@ -64,7 +64,7 @@ export class BookFlightPage implements OnInit {
         this.loaded = true;
       });
       this.store.select(selectHasBookedFlight).subscribe((data) => {
-        this.canBook = data;
+        this.canBook = !data;
       });
   }
 
@@ -82,7 +82,7 @@ export class BookFlightPage implements OnInit {
     this.routeService
       .bookFlight(this.selectedRoute, this.form.aircraft)
       .subscribe((data) => {
-        this.tokenService.setBookedFlight();
+        this.store.dispatch(bookFlight({booked: true}));
         this.setOpen(false, -1);
         this.loadData();
       });

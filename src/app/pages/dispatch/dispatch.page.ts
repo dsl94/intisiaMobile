@@ -5,7 +5,7 @@ import { Router} from "@angular/router";
 import {Booking} from "../../models/booking.model";
 import {LoadingController} from "@ionic/angular";
 import * as L from "leaflet";
-import {resetBasicUserInfo} from "../../state/user/user.actions";
+import {bookFlight, resetBasicUserInfo} from "../../state/user/user.actions";
 import {Store} from "@ngrx/store";
 
 @Component({
@@ -132,6 +132,7 @@ export class DispatchPage implements OnInit {
 
   cancelBooking() {
     this.routeService.cancelBooking().subscribe((data:any) => {
+      this.store.dispatch(bookFlight({booked: false}));
       this.loadData();
     });
   }

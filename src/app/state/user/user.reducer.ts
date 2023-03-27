@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {BasicUser} from "../dto/basic-user.dto";
-import {changeLocation, initBasicUserInfo, resetBasicUserInfo} from "./user.actions";
+import {bookFlight, changeLocation, initBasicUserInfo, resetBasicUserInfo} from "./user.actions";
 import {createRehydrateReducer} from "../rehydrate.reducer";
 
 export interface UserState {
@@ -30,6 +30,13 @@ export const userReducer = createRehydrateReducer(
     user: {
       ...state.user,
       location: location,
+    }
+  })),
+  on(bookFlight, (state, { booked }) => ({
+    ...state,
+    user: {
+      ...state.user,
+      hasBookedFlight: booked,
     }
   })),
 );

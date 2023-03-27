@@ -1,4 +1,4 @@
 export interface BasicUser {
-  location: string;
+  location?: string;
   hasBookedFlight?: boolean;
 }
