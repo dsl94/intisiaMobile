@@ -17,7 +17,6 @@ export class UserEffects {
   ) {}
 
 
-  // Run this code when the addTodo or removeTodo action is dispatched
   changeLocation$ = createEffect(
     () =>
       this.actions$.pipe(
