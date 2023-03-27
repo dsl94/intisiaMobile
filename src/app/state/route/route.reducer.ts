@@ -17,7 +17,6 @@ export const initialState: RouteState = {
 
 export const routesReducer = createRehydrateReducer(
   'ROUTE_STATE',
-  // Supply the initial state
   initialState,
   on(loadRoutes, (state) => ({ ...state, status: 'loading' })),
   on(loadRoutesSuccess, (state, { routes }) => ({
@@ -26,7 +25,6 @@ export const routesReducer = createRehydrateReducer(
     error: null,
     status: 'success',
   })),
-  // Handle todos load failure
   on(loadRoutesFailure, (state, { error }) => ({
     ...state,
     error: error,
